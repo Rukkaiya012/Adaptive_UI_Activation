@@ -1,69 +1,118 @@
-# Adaptive UI
+# AdaptiveUI React Demo
 
-A behavior-driven user interface that responds to user interaction patterns with visual feedback and adaptive elements.
+A React-based demonstration of adaptive user interface behaviors that respond to user interaction patterns and signals. This project showcases how UI elements can dynamically adapt their appearance and behavior based on detected user patterns.
 
-## Overview
+## 🚀 Features
 
-Adaptive UI monitors user behavior patterns and provides real-time visual feedback to improve user experience. The system tracks various interaction signals and responds with contextual UI adaptations.
+### Adaptive UI Behaviors
+- **Signal-Based Animations**: UI responds to different user behavior signals with appropriate visual feedback
+- **Dynamic Tile Effects**: Individual tiles can display various effects based on user interactions
+- **Grid Spacing Adaptation**: The entire grid can expand spacing based on user behavior patterns
+- **Real-time Debug Console**: Live logging of all adaptive behaviors and signal processing
 
-## Features
+### Supported Behavior Signals
+- **Undo Loop** → Pulse Effect: Detects repetitive undo actions
+- **Hover Repeat** → Highlight Effect: Identifies repeated hovering patterns
+- **Dwell** → Expand Spacing: Responds to prolonged interaction in one area
+- **Backtrack** → Nudge Effect: Detects navigation backtracking behavior
+- **Fast Action** → Quick Combo Effect: Identifies rapid user interactions
 
-- **Behavior Signal Detection**: Monitors user interaction patterns
-- **Real-time Visual Feedback**: Immediate UI responses to detected behaviors
-- **Adaptive Interface Elements**: Dynamic styling based on user actions
-- **Smooth Animations**: CSS transitions for polished user experience
+## 🏗️ Architecture
 
-## Behavior Signals
-
-| Signal             | Trigger                        | UI Response                         | Purpose                       |
-|--------------------|--------------------------------|-------------------------------------|-------------------------------|
-| **Excessive Undo** | 3+ undo actions                | Pulsing border (blue/orange)        | Alert to potential confusion  |
-| **Repeated Hover** | 3+ hovers on secondary panel   | Highlight main panel, dim secondary | Focus attention on main panel |
-| **Long Dwell**     | Hover >3 seconds on main panel | Shift panel 10px right              | Acknowledge hesitation        |
-| **Fast Action**    | Click duration <500ms          | Blue highlight border               | Acknowledge rapid actions     |
-
-## Project Structure
-
+### Component Structure
 ```
-Adaptive_UI/
-├── index.html          # Main HTML structure
-├── styles.css          # UI styling and animations
-├── JS/
-│   ├── signals.js      # Behavior tracking logic
-│   └── adaptiveUI.js   # UI response handlers
-└── handover/
-    ├── signal_map.md   # Behavior signal documentation
-    └── ui_notes.md     # UI effect mapping details
+src/
+├── components/
+│   ├── TileGrid.jsx      # Main grid container with 6 demo tiles
+│   ├── Tile.jsx          # Individual tile component with effect handling
+│   ├── Controls.jsx      # Test interface for triggering signals
+│   └── DebugConsole.jsx  # Real-time logging and debugging
+├── hooks/
+│   └── useAdaptiveUI.js  # Core adaptive UI logic and signal processing
+├── App.js                # Main application component
+├── App.css               # Complete styling with animations
+└── index.js              # Application entry point
 ```
 
-## Getting Started
+### Key Technologies
+- **React 19.2.3** - Latest React with modern hooks
+- **CSS Animations** - Smooth transitions and effects
+- **Custom Hooks** - Reusable adaptive UI logic
+- **Signal Processing** - Throttled behavior detection
+- **Real-time Logging** - Debug console with timestamps
 
-1. Open `index.html` in a web browser
-2. Interact with the interface elements:
-   - Hover over panels
-   - Click the Action and Undo buttons
-   - Observe the adaptive responses
+## 🛠️ Installation & Setup
 
-## Technical Implementation
+### Prerequisites
+- Node.js (version 14 or higher)
+- npm or yarn package manager
 
-### Signal Detection
-- **Hover Tracking**: Counts consecutive hover events
-- **Undo Monitoring**: Tracks sequential undo button clicks
-- **Dwell Time**: Measures hover duration on elements
-- **Action Speed**: Calculates click duration timing
+## 📖 Usage Guide
 
-### Visual Effects
-- **Highlight**: Blue border with glow effect
-- **Pulse**: Animated border color transitions
-- **Dim**: Reduced opacity for secondary elements
-- **Shift**: Subtle positional movement
+### Testing Adaptive Behaviors
 
-### Event System
-Uses custom events to decouple signal detection from UI responses, enabling modular and maintainable code architecture.
+1. **Manual Signal Testing**
+   - Use the control buttons to trigger different behavior signals
+   - Select specific tiles or use auto-selection
+   - Observe the visual effects and debug console output
 
-## Browser Compatibility
+2. **Available Test Signals**
+   - **Undo Loop**: Triggers a pulsing animation on the target tile
+   - **Hover Repeat**: Creates a highlight effect with color gradient
+   - **Dwell**: Expands the spacing between all tiles
+   - **Backtrack**: Applies a subtle nudging animation
+   - **Fast Action**: Combines quick highlight with pulse effect
 
-Compatible with modern browsers supporting:
-- CSS3 animations and transitions
-- ES6 JavaScript features
-- Custom DOM events
+3. **Target Selection**
+   - Choose "Auto-select" for random tile targeting
+   - Select specific tiles (Dashboard, Analytics, Settings, Profile, Reports, Help)
+
+### Debug Console Features
+- Real-time logging of all signal processing
+- Timestamped entries for behavior tracking
+- Clear log functionality for fresh testing sessions
+- Automatic scrolling to latest entries
+
+## 🎨 Visual Effects
+
+### Tile Effects
+- **Highlight**: Warm gradient background with scale transformation
+- **Pulse**: Rhythmic scaling animation
+- **Nudge**: Subtle left-right movement
+- **Quick Combo**: Combined highlight and pulse for rapid interactions
+
+### Grid Effects
+- **Expand Spacing**: Increases gap between tiles from 20px to 40px
+- **Smooth Transitions**: All effects use CSS transitions for fluid animations
+
+### Responsive Design
+- Mobile-friendly grid layout
+- Adaptive button sizing
+- Optimized for various screen sizes
+
+## ⚙️ Configuration
+
+### Signal Mapping
+The signal-to-effect mapping is configured in `useAdaptiveUI.js`:
+```javascript
+const SIGNAL_MAPPING = {
+  'undo-loop': 'pulse',
+  'hover-repeat': 'highlight',
+  'dwell': 'expand-spacing',
+  'backtrack': 'nudge',
+  'fast-action': 'quick-combo'
+};
+```
+
+### Throttling
+- Default throttle time: 500ms
+- Prevents signal spam and ensures smooth user experience
+- Configurable via `THROTTLE_TIME` constant
+
+### Animation Durations
+- Highlight: 2000ms
+- Pulse: 1000ms
+- Nudge: 600ms
+- Quick Combo: 1000ms
+- Expand Spacing: 3000ms
+
